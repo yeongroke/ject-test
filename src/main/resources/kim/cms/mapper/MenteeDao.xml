@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kim.cms.dao.MenteeDao">
+
+	<resultMap type="mentee" id="menteeMap">
+        <id column="meno"        property="no"/>
+        <result column="name"   property="name"/>
+        <result column="email"   property="email"/>
+        <result column="pwd"   property="pwd"/>
+        <result column="nick"   property="nick"/>
+        <result column="phone"   property="phone"/>
+        <result column="pstno"   property="pstno"/>
+        <result column="bas_addr"   property="bas_addr"/>
+        <result column="det_addr"   property="det_addr"/>
+        <result column="phot"   property="phot"/>
+        <result column="sell"   property="sell"/>
+        <result column="bkname"   property="bkname"/>
+        <result column="bkno"   property="bkno"/>
+        <result column="rgdt"   property="rgdt"/>
+        <result column="stat"   property="stat"/>
+        <result column="note"   property="note"/>
+        <result column="mtstat"   property="mtstat"/>
+        <result column="rgdtmt" property="rgdtmt"/>
+        <result column="mono"   property="classes.mono"/>
+        <result column="titl"   property="classes.titl"/>
+        <result column="pric"   property="classes.pric"/>
+    </resultMap>
+
+	<select id="checknick" 
+            parameterType="Mentee"
+    resultType="int">
+    SELECT COUNT(*)
+    FROM p_mete p WHERE p.nick=#{nick}
+	</select>
+
+	<select id="checkemail" 
+            parameterType="Mentee"
+    resultType="int">
+    SELECT COUNT(*)
+    FROM p_mete p WHERE p.email=#{email}
+	</select>
+
+	<insert id="signup" parameterType="mentee"
+            useGeneratedKeys="true" keyColumn="meno" keyProperty="no">
+		insert into p_mete(name,email,pwd,nick,rgdt,sell,stat,mtstat)
+        values(#{name},#{email},password(LOWER(#{pwd})),#{nick},now(),#{sell},#{stat},#{mtstat})
+	</insert>
+
+</mapper>
