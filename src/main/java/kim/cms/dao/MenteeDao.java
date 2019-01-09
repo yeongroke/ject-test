@@ -1,5 +1,6 @@
 package kim.cms.dao;
 
+import java.util.Map;
 import kim.cms.domain.Mentee;
 
 public interface MenteeDao {
@@ -9,4 +10,5 @@ public interface MenteeDao {
   int checknick(Mentee mentee);
   int checkemail(Mentee mentee);
   
+  Mentee findbyemailpwd(Map<String, Object> params);
 }

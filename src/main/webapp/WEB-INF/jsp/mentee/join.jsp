@@ -43,12 +43,12 @@
 			</div>
 			<div>
 				<label for="userpassword">비밀번호</label>
-				<input class="joininfo" type="password" name="userpassword" id="userpassword" placeholder="비밀번호 8자이상입니다."
+				<input class="joininfo" type="password" name="pwd" id="userpassword" placeholder="비밀번호 8자이상입니다."
 				oninput="passcheck()" />
 			</div>
 			<div>
-				<label for="userpassword">비밀번호확인</label>
-				<input class="joininfo" type="password" name="userconfpassword" id="userconfpassword" placeholder="입력하신 비밀번호와 똑같이 입력"
+				<label for="userconfpassword">비밀번호확인</label>
+				<input class="joininfo" type="password" name="pwd" id="userconfpassword" placeholder="입력하신 비밀번호와 똑같이 입력"
 				oninput="passcheck()" />
 			</div>
 			<div>
@@ -87,8 +87,6 @@ function nickcheck() {
     var nickrole = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]+$/;
     var nicktest = nickrole.test(nickval);
     
-    console.log("ajax전 ")
-    
     $.ajax({
         type : "POST",
         data : {
@@ -96,8 +94,6 @@ function nickcheck() {
         },
         url : "checknick.do" ,
         success : function(data) {
-            console.log(data);
-            console.log("성공");
             if(nickval== "" && data == '0') {
                 $("#usernick").css("background-color", "white");
                 nickcheckval = 0;
@@ -121,6 +117,7 @@ function emailcheck() {
     var emailtest = emailrole.test(emailval);
     
     $.ajax({
+        type : "POST",
         data : {
             email : emailval
         },
@@ -128,16 +125,16 @@ function emailcheck() {
         success : function(data) {
             if(emailval=="" && data=='0' ) {
                 $("#useremail").css("background-color", "white");
-                emailCheck = 0;
+                emailcheckval = 0;
             } else if (data == '0' && emailtest == true && $("#useremail").val().length > 0) {
                 $("#useremail").css("background-color", "#B0F6AC");
-                emailCheck = 2;
+                emailcheckval = 2;
             } else if (data == '1') {
                 $("#useremail").css("background-color", "#FA5858");
-                emailCheck = 0;
+                emailcheckval = 0;
             }else if(data=='0' && emailtest == false) {
                 $("#useremail").css("background-color", "#FA5858");
-                emailCheck = 0;
+                emailcheckval = 0;
             }
         }
     });
@@ -156,7 +153,6 @@ function passcheck() {
     } else if (passval != passconfval) {
         passcheckval = 0;
         $("#userconfpassword").css("background-color", "#FA5858");
-        
     }
 }
 

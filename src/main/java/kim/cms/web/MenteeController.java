@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kim.cms.domain.Mentee;
 import kim.cms.service.MenteeService;
 
+
 @Controller
 @RequestMapping("/mentee")
 public class MenteeController {
@@ -26,19 +27,29 @@ public class MenteeController {
   }
   
   @RequestMapping(value = "join", method=RequestMethod.POST)
-  public void join2(Mentee mentee) {
+  public String join2(Mentee mentee) {
     menteeService.join(mentee);
+    
+    return "redirect:/app/auth/login";
   }
   
   @RequestMapping(value = "checknick.do", method = { RequestMethod.GET, RequestMethod.POST})
   public @ResponseBody int checknick(Mentee mentee) {
-    System.out.println(menteeService.checknick(mentee));
     return menteeService.checknick(mentee);
   }
   
   @RequestMapping(value = "checkemail.do", method = { RequestMethod.GET, RequestMethod.POST})
   public @ResponseBody int checkemail(Mentee mentee) {
-    System.out.println(mentee.getEmail());
     return menteeService.checkemail(mentee);
+  }
+  
+  @RequestMapping("main")
+  public void main() {
+    
+  }
+  
+  @RequestMapping("login") 
+  public void login() {
+    
   }
 }

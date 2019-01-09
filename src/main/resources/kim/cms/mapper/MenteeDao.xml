@@ -43,8 +43,33 @@
     SELECT COUNT(*)
     FROM p_mete p WHERE p.email=#{email}
 	</select>
-
-	<insert id="signup" parameterType="mentee"
+	
+	<select id = "findbyemailpwd" resultMap ="menteeMap" parameterType ="map">
+		select 
+            meno,
+            name,
+            email,
+            nick,
+            phone,
+            pstno,
+            bas_addr,
+            det_addr,
+            phot,
+            sell,
+            bkname,
+            bkno,
+            rgdt,
+            stat,
+            note,
+            mtstat
+        from 
+            p_mete mte
+        where
+            (mte.email=#{email} and mte.pwd=password(#{pwd}))
+            OR (mte.email=#{email} and mte.pwd=#{pwd})
+	</select>
+	
+	<insert id="join" parameterType="mentee"
             useGeneratedKeys="true" keyColumn="meno" keyProperty="no">
 		insert into p_mete(name,email,pwd,nick,rgdt,sell,stat,mtstat)
         values(#{name},#{email},password(LOWER(#{pwd})),#{nick},now(),#{sell},#{stat},#{mtstat})

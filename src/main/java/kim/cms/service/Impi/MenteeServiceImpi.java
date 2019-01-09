@@ -25,7 +25,6 @@ public class MenteeServiceImpi implements MenteeService {
 
   @Override
   public int checknick(Mentee mentee) {
-    System.out.println(menteeDao.checknick(mentee));
     return menteeDao.checknick(mentee);
   }
 
