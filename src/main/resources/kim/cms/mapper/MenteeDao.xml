@@ -75,4 +75,21 @@
         values(#{name},#{email},password(LOWER(#{pwd})),#{nick},now(),#{sell},#{stat},#{mtstat})
 	</insert>
 
+	<insert id="Naverjoin" parameterType="mentee"
+            useGeneratedKeys="true" keyColumn="meno" keyProperty="no">
+		insert into p_mete(name,email,phot,nick,rgdt,sell,stat,mtstat)
+        values(#{name},#{email},#{phot},#{nick},now(),'N','N','N')
+	</insert>
+	
+	<update id="updateNaver" parameterType="Mentee">
+        UPDATE 
+            p_mete
+        <set>
+            <if test="nick != null">nick = #{nick},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="phot != null">phot = #{phot},</if>
+            <if test="name != null">name = #{name}</if>
+        </set>
+         where meno = #{no}
+    </update>
 </mapper>

@@ -7,6 +7,9 @@ public interface MenteeDao {
   
   int join(Mentee mentee);
   
+  int Naverjoin(Mentee mentee);
+  int updateNaver(Mentee mentee);
+  
   int checknick(Mentee mentee);
   int checkemail(Mentee mentee);
   

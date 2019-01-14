@@ -54,12 +54,32 @@ public class AuthController {
     }
     
     Mentee loginUser = authService.findbyemailpwd(email, pwd);
+    System.out.println("컨트롤러 "+authService.findbyemailpwd(email, pwd));
     if(loginUser != null) {
       session.setAttribute("loginUser", loginUser);
+      System.out.println("컨트롤러 "+loginUser.getEmail());
+      System.out.println("컨트롤러 "+loginUser.getPwd());
       return 1;
     } else {
       session.invalidate();
       return 0;
     }
+  }
+  
+  @RequestMapping("naver")
+  public String naver(String access_token, HttpSession session) {
+    Mentee loginUser = authService.Naverjoin(access_token);
+    System.out.println("naver호출");
+    session.setAttribute("loginUser", loginUser);
+    System.out.println(loginUser);
+    /*System.out.println("이름 "+loginUser.getName());
+    System.out.println("닉네임 "+loginUser.getNick());
+    System.out.println("이메일 "+loginUser.getEmail());*/
+    return "redirect:../mainpage/main";
+  }
+  
+  @GetMapping("callback")
+  public void callback(String access_token, HttpSession session) {
+    
   }
 }
