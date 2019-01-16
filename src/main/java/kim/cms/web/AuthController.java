@@ -72,9 +72,7 @@ public class AuthController {
     System.out.println("naver호출");
     session.setAttribute("loginUser", loginUser);
     System.out.println(loginUser);
-    /*System.out.println("이름 "+loginUser.getName());
-    System.out.println("닉네임 "+loginUser.getNick());
-    System.out.println("이메일 "+loginUser.getEmail());*/
+
     return "redirect:../mainpage/main";
   }
   
